@@ -33,7 +33,8 @@ exports.handler = function(event, context) {
 
   switch (event.httpMethod) {
     case 'GET':
-      return response.send(context, getMongoInfo);
+      var res = getMongoInfo();
+      return response.send(res);
       break;
     case 'POST':
     case 'PUT':
@@ -45,7 +46,7 @@ exports.handler = function(event, context) {
         }
       };
       response.setHttpStatusCode(404);
-      response.send(context, err);
+      response.send(err);
   }
 };
 
