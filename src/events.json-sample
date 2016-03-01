@@ -1,5 +1,17 @@
-[
-  {},
-  {"name": "Joule"},
-  {"name": "Dave"}
-]
+{
+  "env": {
+    "MongoUri": "mongodb://<user>:<pass>@<mongoLocation>"
+  },
+  "events": {
+    "GET": {
+      "/": [
+        {}
+      ]
+    },
+    "POST": {
+      "/": [
+        {}
+      ]
+    }
+  }
+}

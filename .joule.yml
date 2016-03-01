@@ -1,7 +1,7 @@
 version: 0.0.1
 language: 'nodejs'
 environment_variables:
-  - MyVariable # accessible as process.env.MyVariable - value input through the site
+  - MongoUri # accessible as process.env.MyVariable - value input through the site
 methods:
   GET:
     status_codes:
@@ -12,9 +12,9 @@ methods:
       - 409
       - 500
     path_params:
-      - myPathParam : optional # [required or optional], see below for details, accessible as process.env.myPathParam
+      # - myPathParam : optional # [required or optional], see below for details, accessible as process.env.myPathParam
     query_string_params:
-      - myQueryStringParam # accessible as process.env.myQueryStringParam
+      # - myQueryStringParam # accessible as process.env.myQueryStringParam
   POST:
     status_codes:
       - 201 # Can only have one 2xx status code and it must be first in the list
@@ -24,9 +24,9 @@ methods:
       - 409
       - 500
     path_params:
-      - myPathParam : optional # [required or optional], see below for details, accessible as process.env.myPathParam
+      # - myPathParam : optional # [required or optional], see below for details, accessible as process.env.myPathParam
     query_string_params:
-      - myQueryStringParam # accessible as process.env.myQueryStringParam
+      # - myQueryStringParam # accessible as process.env.myQueryStringParam
   PUT:
     status_codes:
       - 201 # Can only have one 2xx status code and it must be first in the list
@@ -36,9 +36,9 @@ methods:
       - 409
       - 500
     path_params:
-      - myPathParam : optional # [required or optional], see below for details, accessible as process.env.myPathParam
+      # - myPathParam : optional # [required or optional], see below for details, accessible as process.env.myPathParam
     query_string_params:
-      - myQueryStringParam # accessible as process.env.myQueryStringParam
+      # - myQueryStringParam # accessible as process.env.myQueryStringParam
   DELETE:
     status_codes:
       - 201 # Can only have one 2xx status code and it must be first in the list
@@ -48,9 +48,9 @@ methods:
       - 409
       - 500
     path_params:
-      - myPathParam : optional # [required or optional], see below for details, accessible as process.env.myPathParam
+      # - myPathParam : optional # [required or optional], see below for details, accessible as process.env.myPathParam
     query_string_params:
-      - myQueryStringParam # accessible as process.env.myQueryStringParam
+      # - myQueryStringParam # accessible as process.env.myQueryStringParam
 
 # path params
 # all required must come before optional

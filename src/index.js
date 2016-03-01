@@ -1,6 +1,6 @@
 /**
- * This is the boilerplate repository for creating joules.
- * Forking this repository should be the starting point when creating a joule.
+ * This is a boilerplate repository for creating MongoDB joules.
+ * Forking this repository will give you a simple MongoDB connection using Mongoose.
  */
 
 /*
@@ -10,15 +10,51 @@
  *    event.{pathParam}, Path parameters as defined in your .joule.yml
  *    event.{queryStringParam}, Query string parameters as defined in your .joule.yml
  */
-var response = require('joule-node-response');
+var Response = require('joule-node-response');
+var mongoose = require('mongoose');
+var mongoUri = process.env.MongoUri;
+
+mongoose.connect(mongoUri);
+var db = mongoose.connection;
+
+db.once('open', function () {
+  console.log('Successfully connected to ' + db.name + ' MongoDB at ' + db.host);
+});
+
+db.on('disconnect', function () {
+  console.log('Disconnected from MongoDB: ' + db.name);
+});
+
+db.on('error', console.error.bind(console, 'connection error:'));
 
 exports.handler = function(event, context) {
-  var name = event.name || 'World';
-  var greeting = 'Hello, ' + name + '.';
+  var response = new Response();
+  response.setContext(context);
 
-  var result = {
-    "message": greeting
+  switch (event.httpMethod) {
+    case 'GET':
+      return response.send(context, getMongoInfo);
+      break;
+    case 'POST':
+    case 'PUT':
+    case 'DELETE':
+    default:
+      var err = {
+        error: {
+          message: 'The resource doens\'t exist.'
+        }
+      };
+      response.setHttpStatusCode(404);
+      response.send(context, err);
+  }
+};
+
+function getMongoInfo () {
+  return {
+    name: db.name,
+    user: db.user,
+    pass: db.pass,
+    host: db.host,
+    port: db.port
   };
-  
-  response.success200(context, result);
 };
